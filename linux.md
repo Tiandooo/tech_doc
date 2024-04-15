@@ -96,3 +96,63 @@ bashCopy code
 git config --global --unset http.proxy
 git config --global --unset https.proxy
 ```
+
+# 三、软连接
+
+在Linux中，你可以使用`ln`命令创建软链接（符号链接）。软链接是指向文件或目录的指针，它们允许你在文件系统中创建指向另一个文件或目录的链接。软链接类似于Windows中的快捷方式。
+
+要创建软链接，可以使用以下命令格式：
+
+```Bash
+ln -s 源文件/目录 目标链接
+```
+
+例如，要将文件 `file.txt` 创建为指向 `/home/user/documents/file.txt` 的软链接，你可以运行以下命令：
+
+```Bash
+ln -s /home/user/documents/file.txt file.txt
+```
+
+如果要创建指向目录的软链接，则需要添加 `-d` 选项。例如：
+
+```Bash
+ln -s -d /path/to/source_directory /path/to/link_directory
+```
+
+这将在`/path/to/link_directory`创建一个指向`/path/to/source_directory`的软链接。
+
+如：
+
+```Python
+ln -s /root/duruibin/mot/mmdetection3d/data/nuscenes_mini/ /root/duruibin/CenterPoint/data/nuscenes
+```
+
+# 四、screen和查看显存
+
+```Bash
+screen -X -S <会话ID或名称> quit
+```
+
+screen -X -S 3081193.ruibin.det2 quit
+
+attach之后重新进入
+
+```Bash
+screen -d -r ruibin.mmtrack_box
+```
+
+持续查看显存
+
+```Bash
+watch -n 1 nvidia-smi
+```
+
+# 五、Tensorboard端口映射
+
+本地访问server的tensorboard
+
+```
+ssh -L [local browser port]:127.0.0.1:[remote tensorboard port] root@[ip] -p [ssh port]
+```
+
+**注意：**`remote tensorboard port`和`local browser port`都不能过小，否则可能和现有的port冲突
